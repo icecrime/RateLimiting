@@ -1,4 +1,4 @@
-from setuptools import setup
+from distutils.core import setup
 
 
 setup(
@@ -8,6 +8,12 @@ setup(
 
     author='Arnaud Porterie',
     author_email='arnaud.porterie@gmail.com',
+    url='https://github.com/icecrime/RateLimiting',
 
     py_modules=['rate_limiting'],
+
+    classifiers=[
+        'Programming Language :: Python',
+        'Topic :: Software Development :: Libraries :: Python Modules',
+    ]
 )
