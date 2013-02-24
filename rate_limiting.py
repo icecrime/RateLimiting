@@ -21,8 +21,8 @@ class RateLimiting(object):
         self.max_calls = max_calls
 
     def __call__(self, f):
-        """The __call__ function allowes the RateLimiting object to be used as
-        a regular function decorator.
+        """The __call__ function allows the RateLimiting object to be used as a
+        regular function decorator.
         """
         @functools.wraps(f)
         def wrapped(*args, **kwargs):
@@ -34,8 +34,7 @@ class RateLimiting(object):
         # We want to ensure that no more than max_calls were run in the allowed
         # period. For this, we store the last timestamps of each call and run
         # the rate verification upon each __enter__ call.
-        call_count = len(self.calls)
-        if call_count >= self.max_calls:
+        if len(self.calls) >= self.max_calls:
             time.sleep(self.period - self._timespan)
         return self
 
