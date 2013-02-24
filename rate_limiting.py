@@ -36,7 +36,7 @@ class RateLimiting(object):
         # the rate verification upon each __enter__ call.
         call_count = len(self.calls)
         if call_count >= self.max_calls:
-            time.sleep(self.period - self.timespan)
+            time.sleep(self.period - self._timespan)
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
@@ -45,9 +45,9 @@ class RateLimiting(object):
 
         # Pop the timestamp list front (ie: the older calls) until the sum goes
         # back below the period. This is our 'sliding period' window.
-        while self.timespan >= self.period:
-            self.calls = self.calls[1:] or []
+        while self._timespan >= self.period:
+            self.calls = self.calls[1:]
 
     @property
-    def timespan(self):
+    def _timespan(self):
         return self.calls[-1] - self.calls[0]
