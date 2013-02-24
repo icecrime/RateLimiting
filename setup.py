@@ -8,4 +8,6 @@ setup(
 
     author='Arnaud Porterie',
     author_email='arnaud.porterie@gmail.com',
+
+    py_modules=['rate_limiting'],
 )
