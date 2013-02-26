@@ -1,3 +1,4 @@
+import random
 import time
 import unittest
 
@@ -19,6 +20,9 @@ class TestBasic(unittest.TestCase):
 
     period = 0.1
     max_calls = 10
+
+    def setUp(self):
+        random.seed()
 
     def validate_call_times(self, ts, max_calls, period):
         # Overall verification: total call duration should span over more than
@@ -72,6 +76,16 @@ class TestBasic(unittest.TestCase):
 
         self.assertEquals(len(f.calls), 3 * self.max_calls)
         self.validate_call_times(f.calls, self.max_calls, self.period)
+
+    def test_random(self):
+        calls = []
+        obj = RateLimiting(self.max_calls, self.period)
+        for i in range(random.randint(10, 50)):
+            with obj:
+                time.sleep(random.random())
+                calls.append(time.time())
+
+        self.validate_call_times(calls, self.max_calls, self.period)
 
 
 if __name__ == "__main__":
