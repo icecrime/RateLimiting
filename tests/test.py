@@ -49,7 +49,7 @@ class TestBasic(unittest.TestCase):
             with obj:
                 calls.append(time.time())
 
-        self.assertEquals(len(calls), 3 * self.max_calls)
+        self.assertEqual(len(calls), 3 * self.max_calls)
         self.validate_call_times(calls, self.max_calls, self.period)
 
     def test_decorator_1(self):
@@ -70,7 +70,7 @@ class TestBasic(unittest.TestCase):
 
         [f() for i in range(3 * self.max_calls)]
 
-        self.assertEquals(len(f.calls), 3 * self.max_calls)
+        self.assertEqual(len(f.calls), 3 * self.max_calls)
         self.validate_call_times(f.calls, self.max_calls, self.period)
 
 
