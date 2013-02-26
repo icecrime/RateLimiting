@@ -18,7 +18,7 @@ class Timer(object):
 
 class TestBasic(unittest.TestCase):
 
-    period = 0.1
+    period = 0.01
     max_calls = 10
 
     def setUp(self):
@@ -80,9 +80,9 @@ class TestBasic(unittest.TestCase):
     def test_random(self):
         calls = []
         obj = RateLimiting(self.max_calls, self.period)
-        for i in range(random.randint(10, 50)):
+        for i in range(random.randint(10, 20)):
             with obj:
-                time.sleep(random.random())
+                time.sleep(random.random() / 10)
                 calls.append(time.time())
 
         self.validate_call_times(calls, self.max_calls, self.period)
