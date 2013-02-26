@@ -1,7 +1,9 @@
 RateLimiting
 =======
 
-Simple Python utility for rate limiting.
+[![Build Status](https://travis-ci.org/icecrime/RateLimiting.png)](https://travis-ci.org/icecrime/RateLimiting)
+
+Simple Python module providing rate limiting.
 
 Overview
 -------------
