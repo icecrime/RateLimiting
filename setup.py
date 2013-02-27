@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name='rate_limiting',
-    version='1.0.0',
+    version='1.0.1',
     description='Simple python rate limiting object',
 
     author='Arnaud Porterie',

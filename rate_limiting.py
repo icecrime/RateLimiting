@@ -1,3 +1,4 @@
+import collections
 import functools
 import time
 
@@ -16,7 +17,10 @@ class RateLimiting(object):
         if max_calls <= 0:
             raise ValueError('Rate limiting number of calls should be > 0')
 
-        self.calls = []
+        # We're using a deque to store the last execution timestamps, not for
+        # its maxlen attribute, but to allow constant time front removal.
+        self.calls = collections.deque()
+
         self.period = period
         self.max_calls = max_calls
 
@@ -45,7 +49,7 @@ class RateLimiting(object):
         # Pop the timestamp list front (ie: the older calls) until the sum goes
         # back below the period. This is our 'sliding period' window.
         while self._timespan >= self.period:
-            self.calls = self.calls[1:]
+            self.calls.popleft()
 
     @property
     def _timespan(self):
