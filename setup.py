@@ -2,8 +2,8 @@ from distutils.core import setup
 
 
 setup(
-    name='rate_limiting',
-    version='1.0.1',
+    name='RateLimiting',
+    version='0.1.1',
     description='Simple python rate limiting object',
 
     author='Arnaud Porterie',

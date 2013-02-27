@@ -2,7 +2,7 @@ import random
 import time
 import unittest
 
-from rate_limiting import RateLimiting
+from ratelimiting import RateLimiting
 
 
 class Timer(object):
