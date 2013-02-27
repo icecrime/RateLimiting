@@ -10,7 +10,7 @@ setup(
     author_email='arnaud.porterie@gmail.com',
     url='https://github.com/icecrime/RateLimiting',
 
-    py_modules=['rate_limiting'],
+    py_modules=['ratelimiting'],
 
     classifiers=[
         'Programming Language :: Python',
