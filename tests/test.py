@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import math
 import random
 import time
 import unittest
@@ -41,7 +42,8 @@ class TestBasic(unittest.TestCase):
     def validate_call_times(self, ts, max_calls, period):
         # Overall verification: total call duration should span over more than
         # the corresponding number of periods.
-        self.assertGreaterEqual(ts[-1] - ts[0], (len(ts) % max_calls) * period)
+        timespan = math.ceil((ts[-1] - ts[0]) / period)
+        self.assertGreaterEqual(max_calls, len(ts) / timespan)
 
         # Sliding verification: no group of 'max_calls' items should span over
         # less than a period.
@@ -92,14 +94,14 @@ class TestBasic(unittest.TestCase):
         self.validate_call_times(f.calls, self.max_calls, self.period)
 
     def test_random(self):
-        calls = []
-        obj = RateLimiting(self.max_calls, self.period)
-        for i in range(random.randint(10, 20)):
-            with obj:
-                time.sleep(random.random() / 10)
-                calls.append(time.time())
+        for _ in xrange(10):
+            calls = []
+            obj = RateLimiting(self.max_calls, self.period)
+            for i in range(random.randint(10, 50)):
+                with obj:
+                    calls.append(time.time())
 
-        self.validate_call_times(calls, self.max_calls, self.period)
+            self.validate_call_times(calls, self.max_calls, self.period)
 
 
 if __name__ == "__main__":
