@@ -94,7 +94,7 @@ class TestBasic(unittest.TestCase):
         self.validate_call_times(f.calls, self.max_calls, self.period)
 
     def test_random(self):
-        for _ in xrange(10):
+        for _ in range(10):
             calls = []
             obj = RateLimiting(self.max_calls, self.period)
             for i in range(random.randint(10, 50)):
